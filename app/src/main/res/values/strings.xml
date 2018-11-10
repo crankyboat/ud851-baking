@@ -8,4 +8,6 @@
     <string name="error_close">Recipe data not available</string>
     <string name="recipe_step_image_content_description">Recipe Step Image</string>
     <string name="tv_recipe_step_detail_description_default_text">Recipe step description</string>
+    <string name="menu_about">About</string>
+    <string name="about">Recipe Icon designed by Freepik from Flaticon</string>
 </resources>
