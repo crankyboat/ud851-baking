@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="list_item_recipe_height">154dp</dimen>
+    <dimen name="list_item_recipe_icon_size">40dp</dimen>
+    <dimen name="list_item_padding_horizontal">16dp</dimen>
+    <dimen name="list_item_padding_vertical">12dp</dimen>
+    <dimen name="list_item_recipe_name_left_margin">16dp</dimen>
+    <dimen name="list_item_recipe_name_start_margin">@dimen/list_item_recipe_name_left_margin</dimen>
+    <dimen name="list_item_recipe_servings_left_padding">8dp</dimen>
+
+    <dimen name="cv_margin_bottom">4dp</dimen>
+    <dimen name="cv_corner_radius">2dp</dimen>
+</resources>

@@ -1,17 +1,20 @@
-package com.udacity.bakingapp;
+package com.udacity.bakingapp.ui;
 
 import android.accounts.NetworkErrorException;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.udacity.bakingapp.R;
+import com.udacity.bakingapp.RecipesNetworkDataListener;
 import com.udacity.bakingapp.models.Recipe;
 import com.udacity.bakingapp.utils.NetworkUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements RecipesListener {
+public class MainActivity extends AppCompatActivity implements RecipesNetworkDataListener {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -23,6 +26,13 @@ public class MainActivity extends AppCompatActivity implements RecipesListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupRecipesViewModel();
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        RecipeListFragment recipeListFragment = new RecipeListFragment();
+        recipeListFragment.setRecipes(mRecipes);
+        fragmentManager.beginTransaction()
+                .add(R.id.fragment_recipe_list_container, recipeListFragment)
+                .commit();
     }
 
     @Override

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Baking App</string>
+    <string name="list_item_recipe_icon_content_description">Recipe</string>
+    <string name="list_item_recipe_name_default_text">Recipe</string>
+    <string name="list_item_recipe_servings_label_default_text">Servings: </string>
+    <string name="list_item_recipe_servings_default_text">1</string>
 </resources>

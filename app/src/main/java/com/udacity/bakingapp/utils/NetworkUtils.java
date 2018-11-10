@@ -12,7 +12,7 @@ import com.androidnetworking.interfaces.StringRequestListener;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.udacity.bakingapp.BuildConfig;
-import com.udacity.bakingapp.RecipesListener;
+import com.udacity.bakingapp.RecipesNetworkDataListener;
 import com.udacity.bakingapp.models.Recipe;
 
 import java.lang.reflect.Type;
@@ -35,20 +35,20 @@ public class NetworkUtils {
         return isConnected;
     }
 
-    private static StringRequestListener getStringToJsonRequestListener(final RecipesListener recipesListener) {
+    private static StringRequestListener getStringToJsonRequestListener(final RecipesNetworkDataListener recipesNetworkDataListener) {
         return new StringRequestListener() {
             @Override
             public void onResponse(String response) {
                 Gson gson = new Gson();
                 Type listType = new TypeToken<List<Recipe>>(){}.getType();
                 List<Recipe> recipes = gson.fromJson(response, listType);
-                recipesListener.updateRecipes(recipes);
+                recipesNetworkDataListener.updateRecipes(recipes);
                 if (BuildConfig.DEBUG) { Log.d(TAG, String.valueOf(recipes)); }
             }
             @Override
             public void onError(ANError error) {
                 if (BuildConfig.DEBUG) { Log.d(TAG, String.valueOf(error)); }
-                recipesListener.updateRecipes(null);
+                recipesNetworkDataListener.updateRecipes(null);
             }
         };
     }
@@ -58,7 +58,7 @@ public class NetworkUtils {
             AndroidNetworking.initialize(context);
             AndroidNetworking.get(RECIPES_URL)
                     .build()
-                    .getAsString(getStringToJsonRequestListener((RecipesListener) context));
+                    .getAsString(getStringToJsonRequestListener((RecipesNetworkDataListener) context));
         } else {
             throw new NetworkErrorException();
         }

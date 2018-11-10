@@ -4,6 +4,6 @@ import com.udacity.bakingapp.models.Recipe;
 
 import java.util.List;
 
-public interface RecipesListener {
+public interface RecipesNetworkDataListener {
     void updateRecipes(List<Recipe> recipes);
 }
