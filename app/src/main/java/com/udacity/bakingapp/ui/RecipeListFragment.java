@@ -14,7 +14,6 @@ import com.udacity.bakingapp.R;
 import com.udacity.bakingapp.models.Recipe;
 
 import java.util.List;
-import java.util.MissingResourceException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,14 +31,6 @@ public class RecipeListFragment extends Fragment implements ItemViewOnClickListe
 
     public void setRecipes(List<Recipe> recipes) {
         mRecipes = recipes;
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (mRecipes == null) {
-            throw new MissingResourceException("Missing recipes data", TAG, "mRecipes");
-        }
     }
 
     @Override

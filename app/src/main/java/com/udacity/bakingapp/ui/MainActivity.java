@@ -27,12 +27,16 @@ public class MainActivity extends AppCompatActivity implements RecipesNetworkDat
         setContentView(R.layout.activity_main);
         setupRecipesViewModel();
 
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        RecipeListFragment recipeListFragment = new RecipeListFragment();
-        recipeListFragment.setRecipes(mRecipes);
-        fragmentManager.beginTransaction()
-                .add(R.id.fragment_recipe_list_container, recipeListFragment)
-                .commit();
+        if(savedInstanceState == null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            RecipeListFragment recipeListFragment = new RecipeListFragment();
+            recipeListFragment.setRecipes(mRecipes);
+            recipeListFragment.setRetainInstance(true);
+            fragmentManager.beginTransaction()
+                    .add(R.id.fragment_recipe_list_container, recipeListFragment)
+                    .commit();
+        }
+
     }
 
     @Override
