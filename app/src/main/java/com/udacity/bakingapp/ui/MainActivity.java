@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity implements RecipesNetworkDat
 
     private List<Recipe> mRecipes;
     private RecipesViewModel mRecipesViewModel;
+    RecipeListFragment mRecipeListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +31,11 @@ public class MainActivity extends AppCompatActivity implements RecipesNetworkDat
 
         if(savedInstanceState == null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
-            RecipeListFragment recipeListFragment = new RecipeListFragment();
-            recipeListFragment.setRecipes(mRecipes);
-            recipeListFragment.setRetainInstance(true);
+            mRecipeListFragment = new RecipeListFragment();
+            mRecipeListFragment.setRecipes(mRecipes);
+            mRecipeListFragment.setRetainInstance(true);
             fragmentManager.beginTransaction()
-                    .add(R.id.fragment_recipe_list_container, recipeListFragment)
+                    .add(R.id.fragment_recipe_list_container, mRecipeListFragment)
                     .commit();
         }
 
@@ -45,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements RecipesNetworkDat
         mRecipes.clear();
         if (recipes != null) {
             mRecipes.addAll(recipes);
+        }
+        if (mRecipeListFragment != null) {
+            mRecipeListFragment.notifyRecipesUpdated();
         }
     }
 

@@ -33,6 +33,10 @@ public class RecipeListFragment extends Fragment implements ItemViewOnClickListe
         mRecipes = recipes;
     }
 
+    public void notifyRecipesUpdated() {
+        mRecipesAdapter.notifyDataSetChanged();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

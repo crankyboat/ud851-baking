@@ -16,4 +16,5 @@
 
     <dimen name="tv_recipe_step_description_margin_left">16dp</dimen>
     <dimen name="tv_recipe_step_description_margin_start">@dimen/tv_recipe_step_description_margin_left</dimen>
+    <dimen name="fragment_list_container_width">400dp</dimen>
 </resources>

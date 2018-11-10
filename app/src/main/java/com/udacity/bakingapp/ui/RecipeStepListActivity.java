@@ -19,6 +19,8 @@ public class RecipeStepListActivity extends AppCompatActivity {
     private static final String EXTRA_RECIPE = "com.udacity.bakingapp.extras.EXTRA_RECIPE";
 
     private Recipe mRecipe;
+    private boolean mTwoPane;
+    private FragmentManager mFragmentManager;
 
     public static Intent getStartIntent(Context context, Recipe recipe) {
         Intent intent = new Intent(context, RecipeStepListActivity.class);
@@ -41,23 +43,48 @@ public class RecipeStepListActivity extends AppCompatActivity {
 
         setTitle(mRecipe.getName());
 
+        if (findViewById(R.id.fragment_recipe_step_detail_container) != null) {
+            mTwoPane = true;
+        } else {
+            mTwoPane = false;
+        }
+        mFragmentManager = getSupportFragmentManager();
+
         if (savedInstanceState == null) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
             RecipeStepListFragment recipeStepListFragment = new RecipeStepListFragment();
             recipeStepListFragment.setRecipeSteps(mRecipe.getSteps());
             recipeStepListFragment.setRetainInstance(true);
-            fragmentManager.beginTransaction()
+            mFragmentManager.beginTransaction()
                     .add(R.id.fragment_recipe_step_list_container, recipeStepListFragment)
                     .commit();
+            if (mTwoPane) {
+                RecipeStepDetailFragment recipeStepDetailFragment = new RecipeStepDetailFragment();
+                recipeStepDetailFragment.setRecipeStep(mRecipe.getSteps().get(0));
+                recipeStepDetailFragment.setRetainInstance(true);
+                mFragmentManager.beginTransaction()
+                        .add(R.id.fragment_recipe_step_detail_container, recipeStepDetailFragment)
+                        .commit();
+            }
         }
 
     }
 
     public void displayRecipeStepDetails(int position) {
-        String recipeName = mRecipe.getName();
+
         RecipeStep recipeStep = mRecipe.getSteps().get(position);
-        Intent intent = RecipeStepDetailActivity.getStartIntent(this, recipeName, recipeStep);
-        startActivity(intent);
+
+        if (mTwoPane) {
+            RecipeStepDetailFragment recipeStepDetailFragment = new RecipeStepDetailFragment();
+            recipeStepDetailFragment.setRecipeStep(recipeStep);
+            recipeStepDetailFragment.setRetainInstance(true);
+            mFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_recipe_step_detail_container, recipeStepDetailFragment)
+                    .commit();
+        } else {
+            String recipeName = mRecipe.getName();
+            Intent intent = RecipeStepDetailActivity.getStartIntent(this, recipeName, recipeStep);
+            startActivity(intent);
+        }
     }
 
     private void closeOnError() {
