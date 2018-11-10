@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
+        android:id="@+id/exo_player_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="0dp"
+        android:visibility="gone" />
+
+    <ImageView
+        android:id="@+id/iv_recipe_step"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/recipe_step_image_height"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="0dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/recipe_step_image_content_description"
+        android:scaleType="centerCrop"
+        android:src="@drawable/whisk_and_bowl"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/tv_recipe_step_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/tv_recipe_step_description_margin_left"
+        android:layout_marginStart="@dimen/tv_recipe_step_description_margin_start"
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+        tools:text="@string/tv_recipe_step_detail_description_default_text"/>
 
 </LinearLayout>

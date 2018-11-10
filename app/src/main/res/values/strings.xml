@@ -6,4 +6,6 @@
     <string name="list_item_recipe_servings_default_text">1</string>
     <string name="list_item_recipe_ingredients">Recipe Ingredients</string>
     <string name="error_close">Recipe data not available</string>
+    <string name="recipe_step_image_content_description">Recipe Step Image</string>
+    <string name="tv_recipe_step_detail_description_default_text">Recipe step description</string>
 </resources>

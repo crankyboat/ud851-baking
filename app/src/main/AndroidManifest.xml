@@ -22,6 +22,10 @@
             android:name=".ui.RecipeStepListActivity"
             android:launchMode="singleTop">
         </activity>
+        <activity
+            android:name=".ui.RecipeStepDetailActivity"
+            android:launchMode="singleTop">
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />

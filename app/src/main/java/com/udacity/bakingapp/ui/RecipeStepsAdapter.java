@@ -66,7 +66,7 @@ public class RecipeStepsAdapter extends RecyclerView.Adapter<RecipeStepsAdapter.
 
         @Override
         public void onClick(View view) {
-
+            mItemViewOnClickListener.onItemViewClick(getAdapterPosition());
         }
     }
 }

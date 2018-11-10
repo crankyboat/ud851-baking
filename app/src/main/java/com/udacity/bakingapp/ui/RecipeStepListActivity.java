@@ -6,10 +6,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.udacity.bakingapp.R;
 import com.udacity.bakingapp.models.Recipe;
+import com.udacity.bakingapp.models.RecipeStep;
 
 public class RecipeStepListActivity extends AppCompatActivity {
 
@@ -49,6 +51,13 @@ public class RecipeStepListActivity extends AppCompatActivity {
                     .commit();
         }
 
+    }
+
+    public void displayRecipeStepDetails(int position) {
+        String recipeName = mRecipe.getName();
+        RecipeStep recipeStep = mRecipe.getSteps().get(position);
+        Intent intent = RecipeStepDetailActivity.getStartIntent(this, recipeName, recipeStep);
+        startActivity(intent);
     }
 
     private void closeOnError() {

@@ -51,5 +51,6 @@ public class RecipeStepListFragment extends Fragment implements ItemViewOnClickL
     @Override
     public void onItemViewClick(int position) {
         Log.d(TAG, "onItemViewClick: " + String.valueOf(position));
+        ((RecipeStepListActivity) getActivity()).displayRecipeStepDetails(position);
     }
 }

@@ -11,4 +11,9 @@
 
     <dimen name="cv_margin_bottom">4dp</dimen>
     <dimen name="cv_corner_radius">2dp</dimen>
+
+    <dimen name="recipe_step_image_height">200dp</dimen>
+
+    <dimen name="tv_recipe_step_description_margin_left">16dp</dimen>
+    <dimen name="tv_recipe_step_description_margin_start">@dimen/tv_recipe_step_description_margin_left</dimen>
 </resources>
