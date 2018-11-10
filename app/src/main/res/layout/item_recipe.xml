@@ -6,7 +6,7 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cv_list_item_recipe"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/list_item_height"
     android:layout_marginBottom="@dimen/cv_margin_bottom"
     card_view:cardCornerRadius="@dimen/cv_corner_radius">
 

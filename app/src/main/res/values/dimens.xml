@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="list_item_recipe_height">154dp</dimen>
+    <dimen name="list_item_height">64dp</dimen>
+
     <dimen name="list_item_recipe_icon_size">40dp</dimen>
     <dimen name="list_item_padding_horizontal">16dp</dimen>
     <dimen name="list_item_padding_vertical">12dp</dimen>

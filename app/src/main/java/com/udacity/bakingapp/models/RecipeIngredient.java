@@ -1,5 +1,7 @@
 package com.udacity.bakingapp.models;
 
+import java.io.Serializable;
+
 //{
 //    "quantity": 6,
 //    "measure": "TBLSP",
@@ -21,7 +23,7 @@ package com.udacity.bakingapp.models;
 //    "ingredient": "Mascapone Cheese(room temperature)"
 //},
 
-public class RecipeIngredient {
+public class RecipeIngredient implements Serializable {
 
     private double quantity;
     private String measure;

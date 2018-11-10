@@ -1,5 +1,7 @@
 package com.udacity.bakingapp.models;
 
+import java.io.Serializable;
+
 //{
 //    "id": 0,
 //    "shortDescription": "Recipe Introduction",
@@ -22,7 +24,7 @@ package com.udacity.bakingapp.models;
 //    "thumbnailURL": "https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58ffda20_7-add-cream-mix-creampie/7-add-cream-mix-creampie.mp4"
 //},
 
-public class RecipeStep {
+public class RecipeStep implements Serializable {
 
     private int id;
     private String shortDescription;

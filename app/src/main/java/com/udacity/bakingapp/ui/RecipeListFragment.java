@@ -1,6 +1,5 @@
 package com.udacity.bakingapp.ui;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -10,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.udacity.bakingapp.BuildConfig;
 import com.udacity.bakingapp.R;
 import com.udacity.bakingapp.models.Recipe;
 
@@ -59,6 +59,7 @@ public class RecipeListFragment extends Fragment implements ItemViewOnClickListe
 
     @Override
     public void onItemViewClick(int position) {
-        Log.d(TAG, "onItemViewClick: " + String.valueOf(position));
+        if (BuildConfig.DEBUG) { Log.d(TAG, "onItemViewClick: " + String.valueOf(position)); }
+        ((MainActivity) getActivity()).displayRecipeStepList(position);
     }
 }

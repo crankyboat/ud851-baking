@@ -2,6 +2,7 @@ package com.udacity.bakingapp.ui;
 
 import android.accounts.NetworkErrorException;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -45,6 +46,12 @@ public class MainActivity extends AppCompatActivity implements RecipesNetworkDat
         if (recipes != null) {
             mRecipes.addAll(recipes);
         }
+    }
+
+    public void displayRecipeStepList(int position) {
+        Recipe recipe = mRecipes.get(position);
+        Intent intent = RecipeStepListActivity.getStartIntent(this, recipe);
+        startActivity(intent);
     }
 
     private void setupRecipesViewModel() {
