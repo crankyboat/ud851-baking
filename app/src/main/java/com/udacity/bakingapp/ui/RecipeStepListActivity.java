@@ -16,7 +16,7 @@ import com.udacity.bakingapp.models.RecipeStep;
 public class RecipeStepListActivity extends AppCompatActivity {
 
     private static final String TAG = RecipeStepListActivity.class.getSimpleName();
-    private static final String EXTRA_RECIPE = "com.udacity.bakingapp.extras.EXTRA_RECIPE";
+    public static final String EXTRA_RECIPE = "com.udacity.bakingapp.extras.EXTRA_RECIPE";
 
     private Recipe mRecipe;
     private boolean mTwoPane;
