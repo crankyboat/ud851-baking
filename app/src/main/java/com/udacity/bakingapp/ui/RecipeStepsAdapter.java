@@ -62,6 +62,13 @@ public class RecipeStepsAdapter extends RecyclerView.Adapter<RecipeStepsAdapter.
         void bind(int position) {
             RecipeStep recipeStep = mRecipeSteps.get(position);
             mRecipeStepShortDescriptionTextView.setText(recipeStep.getShortDescription());
+
+//            int textColor = mContext.getResources().getColor(R.color.white);
+//            int backgroundColor = mContext.getResources().getColor(
+//                    ((position % 2) == 0) ? R.color.colorPrimaryLight : R.color.colorPrimary);
+//            mRecipeStepShortDescriptionTextView.setTextColor(textColor);
+//            mRecipeStepShortDescriptionTextView.setBackgroundColor(backgroundColor);
+
         }
 
         @Override

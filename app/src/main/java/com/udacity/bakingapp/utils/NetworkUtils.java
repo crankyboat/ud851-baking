@@ -18,11 +18,13 @@ import com.udacity.bakingapp.models.Recipe;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class NetworkUtils {
+final public class NetworkUtils {
 
     private static final String TAG = NetworkUtils.class.getSimpleName();
 
     private static final String RECIPES_URL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
+
+    private NetworkUtils() {}
 
     private static boolean isConnectedToInternet(Context context) {
         boolean isConnected = false;
@@ -53,12 +55,12 @@ public class NetworkUtils {
         };
     }
 
-    public static void loadRecipesFromNetworkResource(Context context) throws NetworkErrorException {
+    public static void loadRecipesFromNetworkResource(Context context, RecipesNetworkDataListener dataListener) throws NetworkErrorException {
         if (isConnectedToInternet(context)) {
             AndroidNetworking.initialize(context);
             AndroidNetworking.get(RECIPES_URL)
                     .build()
-                    .getAsString(getStringToJsonRequestListener((RecipesNetworkDataListener) context));
+                    .getAsString(getStringToJsonRequestListener(dataListener));
         } else {
             throw new NetworkErrorException();
         }

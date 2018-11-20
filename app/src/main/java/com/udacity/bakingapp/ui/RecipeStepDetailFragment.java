@@ -1,18 +1,17 @@
 package com.udacity.bakingapp.ui;
 
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.LoadControl;
@@ -35,6 +34,7 @@ import butterknife.ButterKnife;
 public class RecipeStepDetailFragment extends Fragment {
 
     private static final String TAG = RecipeStepDetailFragment.class.getSimpleName();
+    private static final String EXTRA_PLAYER_POSITION = "com.udacity.bakingapp.ui.extras.EXTRA_PLAYER_POSITION";
 
     @BindView(R.id.exo_player_view) SimpleExoPlayerView mExoPlayerView;
     @BindView(R.id.iv_recipe_step) ImageView mRecipeStepImageView;
@@ -42,9 +42,9 @@ public class RecipeStepDetailFragment extends Fragment {
 
     private RecipeStep mRecipeStep;
     private SimpleExoPlayer mExoPlayer;
+    private long mExoPlayerCurrentPosition;
 
     public RecipeStepDetailFragment() {
-
     }
 
     public void setRecipeStep(RecipeStep recipeStep) {
@@ -57,11 +57,17 @@ public class RecipeStepDetailFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_recipe_step_detail, container, false);
         ButterKnife.bind(this, rootView);
 
+        if (savedInstanceState != null) {
+            mExoPlayerCurrentPosition = savedInstanceState.getLong(EXTRA_PLAYER_POSITION, C.TIME_UNSET);
+        } else {
+            mExoPlayerCurrentPosition = 0;
+        }
+
         String videoUrl = mRecipeStep.getVideoUrl();
         String imageUrl = mRecipeStep.getThumbnailUrl();
 
         if (videoUrl != null && !videoUrl.isEmpty()) {
-            initializePlayer(Uri.parse(videoUrl));
+            initializePlayer(Uri.parse(videoUrl), mExoPlayerCurrentPosition);
             mExoPlayerView.setVisibility(View.VISIBLE);
         } else if (imageUrl != null && !imageUrl.isEmpty()) {
             Picasso.with(getActivity())
@@ -77,12 +83,25 @@ public class RecipeStepDetailFragment extends Fragment {
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
+    public void onPause() {
+        super.onPause();
+        mExoPlayerCurrentPosition = mExoPlayer.getCurrentPosition();
         releasePlayer();
     }
 
-    private void initializePlayer(Uri mediaUri) {
+    @Override
+    public void onResume() {
+        super.onResume();;
+        initializePlayer(Uri.parse(mRecipeStep.getVideoUrl()), mExoPlayerCurrentPosition);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putLong(EXTRA_PLAYER_POSITION, mExoPlayerCurrentPosition);
+    }
+
+    private void initializePlayer(Uri mediaUri, long startPosition) {
         if (mExoPlayer == null) {
             // Create an instance of the ExoPlayer.
             TrackSelector trackSelector = new DefaultTrackSelector();
@@ -91,9 +110,11 @@ public class RecipeStepDetailFragment extends Fragment {
             mExoPlayerView.setPlayer(mExoPlayer);
             // Prepare the MediaSource.
             String userAgent = Util.getUserAgent(getActivity(), getString(R.string.app_name));
-            MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
-                    getActivity(), userAgent), new DefaultExtractorsFactory(), null, null);
+            MediaSource mediaSource = new ExtractorMediaSource(mediaUri,
+                    new DefaultDataSourceFactory(getActivity(), userAgent),
+                    new DefaultExtractorsFactory(), null, null);
             mExoPlayer.prepare(mediaSource);
+            mExoPlayer.seekTo(startPosition);
             mExoPlayer.setPlayWhenReady(true);
         }
     }
@@ -105,4 +126,5 @@ public class RecipeStepDetailFragment extends Fragment {
             mExoPlayer = null;
         }
     }
+
 }

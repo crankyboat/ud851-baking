@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.udacity.bakingapp.R;
@@ -16,7 +15,7 @@ import com.udacity.bakingapp.models.RecipeStep;
 public class RecipeStepListActivity extends AppCompatActivity {
 
     private static final String TAG = RecipeStepListActivity.class.getSimpleName();
-    private static final String EXTRA_RECIPE = "com.udacity.bakingapp.extras.EXTRA_RECIPE";
+    public static final String EXTRA_RECIPE = "com.udacity.bakingapp.extras.EXTRA_RECIPE";
 
     private Recipe mRecipe;
     private boolean mTwoPane;
@@ -53,6 +52,7 @@ public class RecipeStepListActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             RecipeStepListFragment recipeStepListFragment = new RecipeStepListFragment();
             recipeStepListFragment.setRecipeSteps(mRecipe.getSteps());
+            recipeStepListFragment.setRecipeIngredients(mRecipe.getIngredients());
             recipeStepListFragment.setRetainInstance(true);
             mFragmentManager.beginTransaction()
                     .add(R.id.fragment_recipe_step_list_container, recipeStepListFragment)
