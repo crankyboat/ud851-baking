@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.udacity.bakingapp.R;
+import com.udacity.bakingapp.RecipeWidgetProvider;
 import com.udacity.bakingapp.RecipesNetworkDataListener;
 import com.udacity.bakingapp.models.Recipe;
 import com.udacity.bakingapp.utils.NetworkUtils;
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements RecipesNetworkDat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setupRecipesViewModel();
+        updateAppWidgets();
 
         if(savedInstanceState == null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
@@ -85,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements RecipesNetworkDat
             mRecipes = new ArrayList<Recipe>();
             mRecipesViewModel.setRecipes(mRecipes);
             try {
-                NetworkUtils.loadRecipesFromNetworkResource(this);
+                NetworkUtils.loadRecipesFromNetworkResource(this, this);
             } catch (NetworkErrorException e) {
                 e.printStackTrace();
                 // TODO
@@ -93,6 +95,10 @@ public class MainActivity extends AppCompatActivity implements RecipesNetworkDat
         } else {
             mRecipes = mRecipesViewModel.getRecipes();
         }
+    }
+
+    private void updateAppWidgets() {
+        RecipeWidgetProvider.updateAppWidgets(this);
     }
 
 }
