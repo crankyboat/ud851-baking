@@ -33,7 +33,7 @@ public class RecipeStepListFragment extends Fragment implements ItemViewOnClickL
     public RecipeStepListFragment() {
     }
 
-    public void setmRecipeIngredients(List<RecipeIngredient> recipeIngredients) {
+    public void setRecipeIngredients(List<RecipeIngredient> recipeIngredients) {
         mRecipeIngredients = recipeIngredients;
     }
 
