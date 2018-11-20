@@ -5,7 +5,7 @@
     <string name="list_item_recipe_name_default_text">Recipe</string>
     <string name="list_item_recipe_servings_label_default_text">Servings: </string>
     <string name="list_item_recipe_servings_default_text">1</string>
-    <string name="list_item_recipe_ingredients">Recipe Ingredients</string>
+    <string name="list_item_recipe_ingredients_label">Ingredients</string>
 
     <string name="error_close">Recipe data not available</string>
     <string name="recipe_step_image_content_description">Recipe Step Image</string>

@@ -53,6 +53,7 @@ public class RecipeStepListActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             RecipeStepListFragment recipeStepListFragment = new RecipeStepListFragment();
             recipeStepListFragment.setRecipeSteps(mRecipe.getSteps());
+            recipeStepListFragment.setmRecipeIngredients(mRecipe.getIngredients());
             recipeStepListFragment.setRetainInstance(true);
             mFragmentManager.beginTransaction()
                     .add(R.id.fragment_recipe_step_list_container, recipeStepListFragment)

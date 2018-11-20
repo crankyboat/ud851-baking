@@ -29,6 +29,6 @@ public class MainActivityScreenTest {
                 .perform(RecyclerViewActions.actionOnItemAtPosition(ITEM_POSITION, click()));
 
         onView(withId(R.id.rv_recipe_step_list)).check(matches(isDisplayed()));
-        onView(withId(R.id.tv_recipe_ingredients)).check(matches(isDisplayed()));
+        onView(withId(R.id.tv_recipe_ingredients_label)).check(matches(isDisplayed()));
     }
 }

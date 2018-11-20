@@ -8,8 +8,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.udacity.bakingapp.R;
+import com.udacity.bakingapp.models.RecipeIngredient;
 import com.udacity.bakingapp.models.RecipeStep;
 
 import java.util.List;
@@ -22,11 +24,17 @@ public class RecipeStepListFragment extends Fragment implements ItemViewOnClickL
 
     private static final String TAG = RecipeStepListFragment.class.getSimpleName();
 
+    @BindView(R.id.tv_recipe_ingredients) TextView mRecipeIngredientsTextView;
     @BindView(R.id.rv_recipe_step_list) RecyclerView mRecipeStepsRecyclerView;
+    private List<RecipeIngredient> mRecipeIngredients;
     private List<RecipeStep> mRecipeSteps;
     private RecipeStepsAdapter mRecipeStepsAdapter;
 
     public RecipeStepListFragment() {
+    }
+
+    public void setmRecipeIngredients(List<RecipeIngredient> recipeIngredients) {
+        mRecipeIngredients = recipeIngredients;
     }
 
     public void setRecipeSteps(List<RecipeStep> recipeSteps) {
@@ -39,6 +47,13 @@ public class RecipeStepListFragment extends Fragment implements ItemViewOnClickL
 
         final View rootView = inflater.inflate(R.layout.fragment_recipe_step_list, container, false);
         ButterKnife.bind(this, rootView);
+
+        StringBuilder stringBuilder = new StringBuilder("");
+        for (RecipeIngredient ingredient : mRecipeIngredients) {
+            stringBuilder.append(ingredient.getIngredient())
+                    .append(", ");
+        }
+        mRecipeIngredientsTextView.setText(stringBuilder.toString());
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         mRecipeStepsRecyclerView.setLayoutManager(layoutManager);
