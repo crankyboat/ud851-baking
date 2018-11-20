@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.widget.RemoteViews;
 
+import com.udacity.bakingapp.ui.MainActivity;
+
 public class RecipeWidgetProvider extends AppWidgetProvider {
 
     private static final String TAG = RecipeWidgetProvider.class.getSimpleName();
@@ -76,6 +78,11 @@ public class RecipeWidgetProvider extends AppWidgetProvider {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0,
                 displayIngredientsIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         views.setPendingIntentTemplate(R.id.widget_recipe_list, pendingIntent);
+
+        Intent startActivityIntent = new Intent(context, MainActivity.class);
+        PendingIntent startActivityPendingIntent = PendingIntent.getActivity(context, 0,
+                startActivityIntent, 0);
+        views.setOnClickPendingIntent(R.id.widget_empty_view_default_image, startActivityPendingIntent);
 
         return views;
     }
