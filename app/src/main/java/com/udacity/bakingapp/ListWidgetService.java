@@ -8,6 +8,7 @@ import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
 import com.udacity.bakingapp.models.Recipe;
+import com.udacity.bakingapp.models.RecipeIngredient;
 import com.udacity.bakingapp.utils.NetworkUtils;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory, R
 
     @Override
     public void onCreate() {
-
+        getRecipes();
     }
 
     @Override
@@ -58,6 +59,19 @@ class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory, R
         Recipe recipe = mRecipes.get(i);
         RemoteViews views = new RemoteViews(mContext.getPackageName(), R.layout.widget_recipe_item);
         views.setTextViewText(R.id.tv_widget_list_item_recipe_name, recipe.getName());
+
+        StringBuilder stringBuilder = new StringBuilder("");
+        for (RecipeIngredient ingredient : recipe.getIngredients()) {
+            stringBuilder.append(ingredient.getIngredient())
+                    .append(", ");
+        }
+        String recipeIngredients = stringBuilder.toString();
+
+        Intent fillInIntent = new Intent();
+        fillInIntent.putExtra(RecipeWidgetProvider.EXTRA_RECIPE_NAME, recipe.getName());
+        fillInIntent.putExtra(RecipeWidgetProvider.EXTRA_RECIPE_INGREDIENTS, recipeIngredients);
+        views.setOnClickFillInIntent(R.id.widget_list_item, fillInIntent);
+
         return views;
     }
 
